@@ -1,4 +1,5 @@
-import React, { useReducer, createContext, useCallback, Children } from 'react';
+import React, { createContext } from 'react';
+import { useHistoryReducer } from './useHistoryReducer';
 import id from 'uuid/v4';
 import initialState from './initialState';
 
@@ -26,7 +27,7 @@ const reducer = (state, action) => {
 export const GrudgeContext = createContext();
 
 const GrudgeProvider = ({ children }) => {
-  const [grudges, dispatch] = useReducer(reducer, initialState);
+  const [grudges, dispatch] = useHistoryReducer(reducer, initialState);
 
   const addGrudge = ({ person, reason }) => {
     dispatch({
