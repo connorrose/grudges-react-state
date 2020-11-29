@@ -40,6 +40,12 @@ input[type='submit']:active {
   background-color: #f4466e;
 }
 
+button:disabled,
+.button:disabled,
+input[type='submit']:disabled {
+  opacity: 50%;
+}
+
 button.full-width,
 .button.full-width,
 input[type='submit'].full-width {

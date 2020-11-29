@@ -27,7 +27,7 @@ const reducer = (state, action) => {
 export const GrudgeContext = createContext();
 
 const GrudgeProvider = ({ children }) => {
-  const [grudges, dispatch] = useHistoryReducer(reducer, initialState);
+  const [grudges, dispatch, historyUtils] = useHistoryReducer(reducer, initialState);
 
   const addGrudge = ({ person, reason }) => {
     dispatch({
@@ -50,7 +50,7 @@ const GrudgeProvider = ({ children }) => {
     })
   };
 
-  const value = { grudges, addGrudge, toggleForgiveness };
+  const value = { grudges, addGrudge, toggleForgiveness, historyUtils };
 
   return (
     <GrudgeContext.Provider value={value}>

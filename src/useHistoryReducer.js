@@ -7,6 +7,9 @@ export const useHistoryReducer = (clientReducer, initialClientState) => {
     future: [],
   }
 
+  // Alternatively, shuffling state could be handled in a wrapped dispatch
+  // instead of a wrapped reducer. However, this makes the history state
+  // less "redux"-like by manipulating it manually
   const reducer = (state, action) => {
     if (action?.type === 'UNDO') {
       if (state.past.length === 0) return state;
@@ -49,7 +52,10 @@ export const useHistoryReducer = (clientReducer, initialClientState) => {
     dispatch({ type: 'REDO'})
   }, [dispatch]);
 
-  return [currentState.present, dispatch, undo, redo];
+  const hasPast = currentState.past.length !== 0;
+  const hasFuture = currentState.future.length !== 0;
+
+  return [currentState.present, dispatch, { undo, redo, hasPast, hasFuture, }];
 }
 
 // FORM VALIDATION?
